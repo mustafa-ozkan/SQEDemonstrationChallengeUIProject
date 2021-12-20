@@ -6,6 +6,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
+import java.util.concurrent.TimeUnit;
+
 public class TestBase {
 
     private Configuration config;
@@ -18,6 +20,7 @@ public class TestBase {
         url = config.getUrl();
         initializelDriver();
         navigateToSite();
+        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
 
     private void navigateToSite() {
@@ -44,7 +47,7 @@ public class TestBase {
             driver = new ChromeDriver();
         }
         else {
-            fail("Unsupported bfrowser " + config.getBrowser());
+            fail("Unsupported browser " + config.getBrowser());
         }
        
     }
